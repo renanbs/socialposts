@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -68,3 +68,12 @@ def post_create(request):
         "form": form,
     }
     return render(request, "post_form.html", context)
+
+
+def post_delete(request, id=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    instance = get_object_or_404(Post, id=id)
+    instance.delete()
+    # messages.success(request, "Successfully Deleted")
+    return redirect("posts:list")
