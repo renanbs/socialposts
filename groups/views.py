@@ -88,3 +88,10 @@ def group_update(request, id=None):
     return render(request, "group_form.html", context)
 
 
+def group_delete(request, id=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    instance = get_object_or_404(Group, id=id)
+    instance.delete()
+    messages.success(request, "Successfully Deleted")
+    return redirect("groups:list")

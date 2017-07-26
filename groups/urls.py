@@ -5,7 +5,7 @@ from .views import (
     group_create,
     group_detail,
     group_update,
-    # group_delete,
+    group_delete,
 )
 
 urlpatterns = [
@@ -13,5 +13,5 @@ urlpatterns = [
     url(r'^create/$', group_create),
     url(r'^(?P<id>\d+)/$', group_detail, name="detail"),
     url(r'^(?P<id>\d+)/edit/$', group_update, name="update"),
-    # url(r'^(?P<id>\d+)/delete/$', group_delete),
+    url(r'^(?P<id>\d+)/delete/$', group_delete),
 ]
