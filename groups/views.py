@@ -41,18 +41,32 @@ def group_detail(request, id=None):
 
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
-    # share_string = quote_plus(instance.content)
+
     context = {
         "title": instance.title,
         "instance": instance,
-        # "share_string": share_string,
-
-
-
-
-
-
-
-
     }
     return render(request, "group_detail.html", context)
+
+
+def group_create(request):
+    print(request.user)
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+
+    if not request.user.is_authenticated():
+        raise Http404
+
+    form = GroupForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.save()
+        messages.success(request, "Successfully Created")
+        return HttpResponseRedirect(instance.get_absolute_url())
+    context = {
+        "form": form,
+    }
+    return render(request, "post_form.html", context)
+
+
