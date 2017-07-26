@@ -23,7 +23,6 @@ def post_list(request):
             Q(content__icontains=query)
         ).distinct()  # avoid duplicated items
 
-
     paginator = Paginator(queryset_list, 5)  # Show 5 contacts per page
     page_request_var = 'page'
 

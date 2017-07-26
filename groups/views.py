@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 from .forms import GroupForm
 from .models import Group
@@ -14,6 +15,14 @@ def group_list(request):
     queryset_list = Group.objects.all() #.order_by("-timestamp")
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Group.objects.all()
+
+    query = request.GET.get("q")
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(title__icontains=query) |
+            Q(url__icontains=query) |
+            Q(admin__icontains=query)
+        ).distinct()  # avoid duplicated items
 
     paginator = Paginator(queryset_list, 5)  # Show 5 contacts per page
     page_request_var = 'page'
