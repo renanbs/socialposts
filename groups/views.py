@@ -38,7 +38,7 @@ def group_list(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         "object_list": queryset,
-        "title": "List",
+        "title": "Group List",
         "page_request_var": page_request_var,
     }
     return render(request, "group_list.html", context)
