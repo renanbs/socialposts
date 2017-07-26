@@ -36,3 +36,23 @@ def group_list(request):
     return render(request, "group_list.html", context)
 
 
+def group_detail(request, id=None):
+    instance = get_object_or_404(Group, id=id)
+
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    # share_string = quote_plus(instance.content)
+    context = {
+        "title": instance.title,
+        "instance": instance,
+        # "share_string": share_string,
+
+
+
+
+
+
+
+
+    }
+    return render(request, "group_detail.html", context)

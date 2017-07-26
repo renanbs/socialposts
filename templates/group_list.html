@@ -21,8 +21,10 @@
 
                     <div class="caption post-detail-item">
 
-                        <!--<h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>-->
-                        <!--<p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>-->
+                        <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+                        <small style="padding-left: 10px;"><a href="{{ obj.url }}">{{ obj.url }}</a></small>
+                        <hr/>
+                        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
 
                     </div>
                 </div>

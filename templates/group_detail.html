@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load urlify %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+    {{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+{% block post_detail_link %}
+<li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-8 col-sm-offset-2">
+        <h1>{{ title }}</h1>
+        <hr/>
+                <br/>
+        {% if instance.user.get_full_name %}
+        <p>Author: {{ instance.user.get_full_name }}</p>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12">
+                <p>{{ instance.url }}</p>
+                <p>{{ instance.group_status }}</p>
+                <p>{{ instance.admin }}</p>
+                <p>{{ instance.admin_status }}</p>
+                <p>{{ instance.frequency }}</p>
+                <p>{{ instance.frq_scale }}</p>
+
+                <hr/>
+                <br/>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
