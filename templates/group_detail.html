@@ -11,23 +11,64 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-sm-8 col-sm-offset-2">
-        <h1>{{ title }}</h1>
-        <small style="padding-left: 10px;"><a href="{{ instance.url }}">{{ instance.url }}</a></small>
-        <hr/>
-               <br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ instance.title }}</h1>
+            <small class="pull-left" style="padding-left: 10px;"><a href="{{ instance.url }}">{{ instance.url }}</a></small>
+            <br/>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-8 column">
+            <!--<div class="panel panel-warning">-->
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        All Systems Operational
+                        <small class="pull-right">Refreshed 39 minutes ago</small>
+                    </h3>
+                </div>
+            </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <p>Group Status   :{{ instance.group_status }}</p>
-                <p>Admin contact  :{{ instance.admin }}</p>
-                <p>Admin Status   :{{ instance.admin_status }}</p>
-                <p>Post freq      :{{ instance.frequency }}</p>
-                <p>Post freq scale:{{ instance.frq_scale }}</p>
 
-                <hr/>
-                <br/>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="list-group">
+
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">
+                                <strong>Group Status</strong>
+                             </h4>
+                            <p class="list-group-item-text">
+                                <span class="label label-danger">{{ instance.group_status }}</span>
+                            </p>
+                        </div>
+
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">
+                                <strong>Admin contact: </strong> {{ instance.admin }}
+                            </h4>
+                            <p class="list-group-item-text">
+                                <span class="label label-success">{{ instance.admin_status }}</span>
+                            </p>
+                        </div>
+
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">
+                                <strong>Post Frequency Allowed </strong>
+                            </h4>
+                            <p class="list-group-item-text">
+                                <span class="label label-success">{{ instance.frequency }} - {{ instance.frq_scale }}</span>
+                            </p>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
 {% endblock content %}

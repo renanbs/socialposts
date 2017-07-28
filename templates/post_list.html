@@ -18,13 +18,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="thumbnail">
-
                     <div class="caption post-detail-item">
-
                         <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
                         {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
                         {{ obj.content }}
-                        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+                        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-success" role="button">View</a></p>
 
                     </div>
                 </div>
