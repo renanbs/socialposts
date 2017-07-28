@@ -15,4 +15,5 @@ class GroupForm(forms.ModelForm):
             "admin_status",
             "frequency",
             "frq_scale",
+            "obs",
         ]
