@@ -13,19 +13,17 @@
 {% block content %}
     <div class="col-sm-8 col-sm-offset-2">
         <h1>{{ title }}</h1>
+        <small style="padding-left: 10px;"><a href="{{ instance.url }}">{{ instance.url }}</a></small>
         <hr/>
-                <br/>
-        {% if instance.user.get_full_name %}
-        <p>Author: {{ instance.user.get_full_name }}</p>
-        {% endif %}
+               <br/>
+
         <div class="row">
             <div class="col-sm-12">
-                <p>{{ instance.url }}</p>
-                <p>{{ instance.group_status }}</p>
-                <p>{{ instance.admin }}</p>
-                <p>{{ instance.admin_status }}</p>
-                <p>{{ instance.frequency }}</p>
-                <p>{{ instance.frq_scale }}</p>
+                <p>Group Status   :{{ instance.group_status }}</p>
+                <p>Admin contact  :{{ instance.admin }}</p>
+                <p>Admin Status   :{{ instance.admin_status }}</p>
+                <p>Post freq      :{{ instance.frequency }}</p>
+                <p>Post freq scale:{{ instance.frq_scale }}</p>
 
                 <hr/>
                 <br/>

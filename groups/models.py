@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 class Group(models.Model):
     title = models.CharField(max_length=200)
     url = models.URLField()
+    contact_updated = models.DateField(auto_now=False, auto_now_add=True)
     group_status = models.CharField(max_length=20)
     admin = models.CharField(max_length=20)
     admin_status = models.CharField(max_length=20)
