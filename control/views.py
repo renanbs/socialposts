@@ -10,8 +10,7 @@ from .models import Control
 
 
 def control_list(request):
-    # today = timezone.now().date()
-    # queryset_list = Post.objects.filter(draft=False).filter(publish__lte=timezone.now()) #all() #.order_by("-timestamp")
+
     queryset_list = Control.objects.all() #.order_by("-timestamp")
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Control.objects.all()
@@ -23,23 +22,23 @@ def control_list(request):
     #         Q(url__icontains=query) |
     #         Q(admin__icontains=query)
     #     ).distinct()  # avoid duplicated items
-
-    paginator = Paginator(queryset_list, 5)  # Show 5 contacts per page
-    page_request_var = 'page'
-
-    page = request.GET.get(page_request_var)
-    try:
-        queryset = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        queryset = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        queryset = paginator.page(paginator.num_pages)
+    #
+    # paginator = Paginator(queryset_list, 5)  # Show 5 contacts per page
+    # page_request_var = 'page'
+    #
+    # page = request.GET.get(page_request_var)
+    # try:
+    #     queryset = paginator.page(page)
+    # except PageNotAnInteger:
+    #     # If page is not an integer, deliver first page.
+    #     queryset = paginator.page(1)
+    # except EmptyPage:
+    #     # If page is out of range (e.g. 9999), deliver last page of results.
+    #     queryset = paginator.page(paginator.num_pages)
     context = {
-        "object_list": queryset,
+        "object_list": queryset_list,
         "title": "Control",
-        "page_request_var": page_request_var,
+        # "page_request_var": page_request_var,
     }
     return render(request, "control_list.html", context)
 
