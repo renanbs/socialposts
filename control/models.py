@@ -23,7 +23,6 @@ class Control(models.Model):
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    # post = models.ForeignKey(Post)
 
     def __str__(self):
         return str(self.published)
