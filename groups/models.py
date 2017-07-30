@@ -1,5 +1,7 @@
 from django.db import models
 
+from posts.models import Post
+
 from django.core.urlresolvers import reverse
 
 
@@ -13,6 +15,8 @@ class Group(models.Model):
     frequency = models.IntegerField()  # allowed post frequency
     frq_scale = models.CharField(max_length=20, blank=True)
     obs = models.TextField(blank=True)
+
+    # posts = models.ManyToManyField(Post, through='Control')
 
     def __str__(self):
         return self.title

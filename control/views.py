@@ -11,9 +11,12 @@ from .models import Control
 
 def control_list(request):
 
-    queryset_list = Control.objects.all() #.order_by("-timestamp")
-    if request.user.is_staff or request.user.is_superuser:
-        queryset_list = Control.objects.all()
+    # queryset_list = Control.objects.all().order_by("group")
+    # queryset_list = Control.objects.all()
+    queryset_list = Control.objects.filter(group__title__icontains="title")
+    # queryset_list = Control.objects.filter(group__id__eq=1)
+    # if request.user.is_staff or request.user.is_superuser:
+    #     queryset_list = Control.objects.all()
 
     # query = request.GET.get("q")
     # if query:
