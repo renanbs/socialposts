@@ -1,6 +1,7 @@
 from django.db import models
 
 from posts.models import Post
+# from control.models import Control
 
 from django.core.urlresolvers import reverse
 
@@ -17,6 +18,7 @@ class Group(models.Model):
     obs = models.TextField(blank=True)
 
     # posts = models.ManyToManyField(Post, through='Control')
+    posts = models.ManyToManyField('posts.Post')
 
     def __str__(self):
         return self.title

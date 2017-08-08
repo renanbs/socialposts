@@ -21,8 +21,8 @@ from django.core.urlresolvers import reverse
 class Control(models.Model):
     published = models.DateField(auto_now=False, auto_now_add=False)
 
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    # post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    group = models.ForeignKey('groups.Group', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.published)
