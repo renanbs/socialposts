@@ -18,7 +18,7 @@ class Group(models.Model):
     obs = models.TextField(blank=True)
 
     # posts = models.ManyToManyField(Post, through='Control')
-    posts = models.ManyToManyField('posts.Post')
+    posts = models.ManyToManyField(Post)
 
     def __str__(self):
         return self.title
