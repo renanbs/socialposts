@@ -50,9 +50,12 @@ def group_detail(request, id=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
 
+    controls = instance.control_set.all()
+
     context = {
         "title": instance.title,
         "instance": instance,
+        "controls": controls,
     }
     return render(request, "group_detail.html", context)
 

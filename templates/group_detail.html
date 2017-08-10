@@ -73,10 +73,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for post in instance.posts.all %}
+                    {% for control in controls %}
                     <tr>
-                        <td>{{ post.title }}</td>
-                        <td>{{ post.content }}</td>
+                        <td>{{ control.post.title }}</td>
+                        <td>{{ control.post.content }}</td>
+                        <td>{{ control.published }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>
