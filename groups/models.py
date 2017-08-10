@@ -17,8 +17,7 @@ class Group(models.Model):
     frq_scale = models.CharField(max_length=20, blank=True)
     obs = models.TextField(blank=True)
 
-    # posts = models.ManyToManyField(Post, through='Control')
-    posts = models.ManyToManyField(Post)
+    posts = models.ManyToManyField(Post, through='control.Control')
 
     def __str__(self):
         return self.title

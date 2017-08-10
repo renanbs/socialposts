@@ -21,7 +21,7 @@ from django.core.urlresolvers import reverse
 class Control(models.Model):
     published = models.DateField(auto_now=False, auto_now_add=False)
 
-    # post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey('posts.Post', on_delete=models.CASCADE)
     group = models.ForeignKey('groups.Group', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -30,5 +30,5 @@ class Control(models.Model):
     # def get_absolute_url(self):
     #     return reverse("groups:detail", kwargs={"id": self.id})
     #
-    # class Meta:
-    #     ordering = ['-id']
+    class Meta:
+        ordering = ['group']
