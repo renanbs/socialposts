@@ -50,6 +50,7 @@ def group_detail(request, id=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
 
+    # get info for posts
     controls = instance.control_set.all()
 
     context = {
