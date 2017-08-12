@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block head_extra %}
+{{ form.media }}
+{% endblock head_extra %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="col-sm-6 col-sm-offset-3">
+    <h1>Create Control</h1>
+    <hr/>
+    <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+        {{ form | crispy }}
+    <input type="submit" class="btn btn-success" value="Create Control"/>
+    </form>
+</div>
+{% endblock content %}

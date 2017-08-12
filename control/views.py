@@ -14,7 +14,6 @@ def control_list(request):
     # queryset_list = Control.objects.all().order_by("group")
     # queryset_list = Control.objects.all().filter(group__pk=1)
     queryset_list = Control.objects.all()
-    print(queryset_list)
     # queryset_list = Control.objects.all()
     # queryset_list = Control.objects.filter(group__title__icontains="title")
 
@@ -48,3 +47,23 @@ def control_list(request):
     }
     return render(request, "control_list.html", context)
 
+
+def control_create(request):
+    print(request.user)
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+
+    if not request.user.is_authenticated():
+        raise Http404
+
+    form = ControlForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.save()
+        messages.success(request, "Successfully Created")
+        return HttpResponseRedirect(instance.get_absolute_url())
+    context = {
+        "form": form,
+    }
+    return render(request, "control_create.html", context)

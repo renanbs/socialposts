@@ -8,5 +8,7 @@ class ControlForm(forms.ModelForm):
     class Meta:
         model = Control
         fields = [
+            "group",
+            "post",
             "published",
         ]

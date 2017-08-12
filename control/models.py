@@ -27,8 +27,8 @@ class Control(models.Model):
     def __str__(self):
         return str(self.published)
 
-    # def get_absolute_url(self):
-    #     return reverse("groups:detail", kwargs={"id": self.id})
-    #
+    def get_absolute_url(self):
+        return reverse("control:list")
+
     class Meta:
-        ordering = ['group']
+        ordering = ['-group', 'published']
