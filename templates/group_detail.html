@@ -11,81 +11,65 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
             <h1>{{ instance.title }}</h1>
             <small class="pull-left" style="padding-left: 10px;"><a href="{{ instance.url }}">{{ instance.url }}</a></small>
-            <br/>
         </div>
     </div>
-    <div class="row clearfix">
-        <div class="col-md-8 column">
-            <!--<div class="panel panel-warning">-->
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        All Systems Operational
-                        <small class="pull-right">Refreshed 39 minutes ago</small>
-                    </h3>
+    <div class="row">
+        <div class="col-8">
+            <div class="card card-success mb-3">
+                <div class="card-block" style="padding: 0.5rem">
+                    <h4 class="card-title">All Systems Operational</h4>
+                    <p class="card-text text-right"><small class="text-muted">Refreshed 39 minutes ago</small></p>
+
                 </div>
             </div>
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            <h4 class="list-group-item-heading">
-                                <strong>Group Status</strong>
-                             </h4>
-                            <p class="list-group-item-text">
-                                <span class="label label-danger">{{ instance.group_status }}</span>
-                            </p>
-                        </div>
 
-                        <div class="list-group-item">
-                            <h4 class="list-group-item-heading">
-                                <strong>Admin contact: </strong> {{ instance.admin }}
-                            </h4>
-                            <p class="list-group-item-text">
-                                <span class="label label-success">{{ instance.admin_status }}</span>
-                            </p>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-block">
+                            <h4>Group Status <span class="badge badge-default pull-right">{{ instance.group_status }}</span></h4>
                         </div>
+                    </div>
 
-                        <div class="list-group-item">
-                            <h4 class="list-group-item-heading">
-                                <strong>Post Frequency Allowed </strong>
-                            </h4>
-                            <p class="list-group-item-text">
-                                <span class="label label-success">{{ instance.frequency }} - {{ instance.frq_scale }}</span>
-                            </p>
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">Admin contact <span class="badge badge-default pull-right">{{ instance.admin_status }}</span></h4>
+                            <h6 class="card-subtitle text-muted">{{ instance.admin }}</h6>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-block">
+                            <h4>Post Frequency Allowed <span class="badge badge-default pull-right">{{ instance.frequency }} - {{ instance.frq_scale }}</span></h4>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <h2>Posts</h2>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th>Published</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for control in controls %}
+
+            <h2>Posts</h2>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Published</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for control in controls %}
                     <tr>
                         <td>{{ control.post.title }}</td>
                         <td>{{ control.post.content }}</td>
                         <td>{{ control.published }}</td>
                     </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
 
 {% endblock content %}

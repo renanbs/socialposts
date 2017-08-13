@@ -11,18 +11,13 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-sm-8 col-sm-offset-2">
-        <h1>{{ title }}</h1>
-        <hr/>
-                <br/>
-        {% if instance.user.get_full_name %}
-        <p>Author: {{ instance.user.get_full_name }}</p>
-        {% endif %}
-        <div class="row">
-            <div class="col-sm-12">
-                <div class='post-detail-item'>{{ instance.content }}</div>
-                <hr/>
-                <br/>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h1 class="mb-3">{{ title }}</h1>
+            <div class="card">
+                <div class="card-block">
+                    <p class="card-text">{{ instance.content }}</p>
+                </div>
             </div>
         </div>
     </div>

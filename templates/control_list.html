@@ -1,25 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="container">
-    <div class="col-sm-6 col-sm-offset-3">
-        <h1>{{ title }}</h1>
-        <form method="get" action="">
-            <div class="input-group">
-                <input type="text" class="form-control" name="q" placeholder="Search groups" value="{{ request.GET.q }}"/>
-                <span class="input-group-btn">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1>{{ title }}</h1>
+            <form method="get" action="">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="q" placeholder="Search groups" value="{{ request.GET.q }}"/>
+                    <span class="input-group-btn">
                     <!--<input class="btn btn-default" type="submit" value="Search"/>-->
                     <button class="btn btn-default" type="submit"/><i class="fa fa-search" aria-hidden="true"></i>
                 </span>
-            </div>
-        </form>
-        <br/>
+                </div>
+            </form>
 
-        <div class="row custyle">
-            <table class="table table-hover table-striped table-responsive">
-                <thead>
-                <a href="{{ object_list.get_absolute_url }}create" class="btn btn-primary btn-xs pull-right"><strong>+</strong> Add new</a>
+            <a href="{{ object_list.get_absolute_url }}create" class="btn btn-primary float-right mb-3"><i class="fa fa-plus"></i> Add new</a>
+
+            <table class="table table-hover table-striped">
+                <thead class="thead-inverse">
                 <tr>
                     <th>Group</th>
                     <th>Post</th>
@@ -28,25 +26,18 @@
                 </tr>
                 </thead>
                 {% for obj in object_list %}
-                <tr>
-                    <td><a href="{{ obj.group.get_absolute_url }}">{{ obj.group.title }}</a></td>
-                    <td><a href="{{ obj.post.get_absolute_url }}">{{ obj.post.title }}</a></td>
-                    <td>{{ obj.published }}</td>
-                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                </tr>
+                    <tr>
+                        <td><a href="{{ obj.group.get_absolute_url }}">{{ obj.group.title }}</a></td>
+                        <td><a href="{{ obj.post.get_absolute_url }}">{{ obj.post.title }}</a></td>
+                        <td>{{ obj.published }}</td>
+                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><i class="fa fa-pencil"></i> Edit</a>
+                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Del</a></td>
+                    </tr>
                 {% endfor %}
-
-
             </table>
-        </div>
 
 
-
-
-
-
-
-        <div class="pagination">
+            <div class="pagination">
             <span class="step-links">
                 {% if object_list.has_previous %}
                     <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
@@ -60,7 +51,7 @@
                     <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
                 {% endif %}
             </span>
+            </div>
         </div>
     </div>
-</div>
 {% endblock content %}

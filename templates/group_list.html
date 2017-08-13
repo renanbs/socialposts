@@ -1,33 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <div class="col-sm-6 col-sm-offset-3">
-        <h1>{{ title }}</h1>
-        <form method="get" action="">
-            <div class="input-group">
-                <input type="text" class="form-control" name="q" placeholder="Search groups" value="{{ request.GET.q }}"/>
-                <span class="input-group-btn">
-                    <!--<input class="btn btn-default" type="submit" value="Search"/>-->
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h1>{{ title }}</h1>
+            <form method="get" action="">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="q" placeholder="Search groups" value="{{ request.GET.q }}"/>
+                    <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"/><i class="fa fa-search" aria-hidden="true"></i>
                 </span>
-            </div>
-        </form>
-        <br/>
-        {% for obj in object_list %}
-        <div class="row" style="display: flex; align-items: center;">
-            <div class="col-sm-10">
-                <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
-                <small style="padding-left: 10px;"><a href="{{ obj.url }}">{{ obj.url }}</a></small>
-            </div>
-            <div class="col-sm-2 center-block">
-                <a href="{{ obj.get_absolute_url }}" class="btn btn-success" role="button">Details</a>
-            </div>
-        </div>
-         <hr/>
-        {% endfor %}
+                </div>
+            </form>
+            {% for obj in object_list %}
+                <div class="card mb-3">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-8">
+                                <h4 class="card-title"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h4>
+                                <small style="padding-left: 10px;"><a href="{{ obj.url }}">{{ obj.url }}</a></small>
+                            </div>
+                            <div class="col-4 align-self-center" style="display: flex; align-items: center; justify-content: center;">
+                                <a href="{{ obj.get_absolute_url }}" class="btn btn-success">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
-        <div class="pagination">
+
+            {#        <nav aria-label="...">#}
+            {#            <ul class="pagination">#}
+            {#                <li class="page-item disabled">#}
+            {#                    <a class="page-link" href="#" tabindex="-1">Previous</a>#}
+            {#                </li>#}
+            {#                <li class="page-item"><a class="page-link" href="#">1</a></li>#}
+            {#                <li class="page-item active">#}
+            {#                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>#}
+            {#                </li>#}
+            {#                <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+            {#                <li class="page-item">#}
+            {#                    <a class="page-link" href="#">Next</a>#}
+            {#                </li>#}
+            {#            </ul>#}
+            {#        </nav>#}
+
+            <div class="pagination">
             <span class="step-links">
                 {% if object_list.has_previous %}
                     <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
@@ -41,6 +59,7 @@
                     <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
                 {% endif %}
             </span>
+            </div>
         </div>
     </div>
 {% endblock content %}
