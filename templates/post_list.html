@@ -8,14 +8,16 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
                     <span class="input-group-btn">
-                    <!--<input class="btn btn-default" type="submit" value="Search"/>-->
+
                     <button class="btn btn-default" type="submit"/><i class="fa fa-search" aria-hidden="true"></i>
                 </span>
                 </div>
             </form>
 
+            <a href="{{ object_list.get_absolute_url }}create" class="btn btn-primary float-right mb-3"><i class="fa fa-plus"></i> Add new</a>
+
             {% for obj in object_list %}
-                <div class="card mb-3">
+                <div class="card mb-3" style="max-width: 100%; width: 100%;">
                     <div class="card-block">
                         <div class="row">
                             <div class="col-8">

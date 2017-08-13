@@ -12,8 +12,11 @@
                 </span>
                 </div>
             </form>
+
+            <a href="{{ object_list.get_absolute_url }}create" class="btn btn-primary float-right mb-3"><i class="fa fa-plus"></i> Add new</a>
+
             {% for obj in object_list %}
-                <div class="card mb-3">
+                <div class="card mb-3" style="max-width: 100%; width: 100%;">
                     <div class="card-block">
                         <div class="row">
                             <div class="col-8">
