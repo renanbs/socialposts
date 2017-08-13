@@ -75,7 +75,7 @@ def post_create(request):
     context = {
         "form": form,
     }
-    return render(request, "post_form.html", context)
+    return render(request, "post_create.html", context)
 
 
 def post_delete(request, id=None):
@@ -102,4 +102,4 @@ def post_update(request, id=None):
         "instance": instance,
         "form": form,
     }
-    return render(request, "post_form.html", context)
+    return render(request, "post_create.html", context)

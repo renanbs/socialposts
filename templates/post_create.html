@@ -3,19 +3,19 @@
 
 
 {% block head_extra %}
-{{ form.media }}
+    {{ form.media }}
 {% endblock head_extra %}
 
 {% block content %}
-{{ block.super }}
+    {{ block.super }}
 
     <div class="row justify-content-center">
         <div class="col-8">
-            <h1>Create Control</h1>
+            <h1>Create Post</h1>
             <hr/>
             <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
                 {{ form | crispy }}
-                <input type="submit" class="btn btn-success" value="Create Control"/>
+                <input type="submit" class="btn btn-success" value="Create Post"/>
             </form>
         </div>
     </div>

@@ -79,7 +79,7 @@ def group_create(request):
     context = {
         "form": form,
     }
-    return render(request, "post_form.html", context)
+    return render(request, "group_create.html", context)
 
 
 def group_update(request, id=None):
@@ -97,7 +97,7 @@ def group_update(request, id=None):
         "instance": instance,
         "form": form,
     }
-    return render(request, "group_form.html", context)
+    return render(request, "group_create.html", context)
 
 
 def group_delete(request, id=None):
