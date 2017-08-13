@@ -26,7 +26,7 @@
 <!--</script>-->
 
 
-{% include "messages_display.html" %}
+{#{% include "messages_display.html" %}#}
 <div class="container">
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-3">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,7 @@
         </div>
       </div>
     </nav>
+{% include "messages_display.html" %}
     {% block content %}
 
     {% endblock content %}
