@@ -1,7 +1,6 @@
 from django.db import models
 
 from posts.models import Post
-# from control.models import Control
 
 from django.core.urlresolvers import reverse
 
