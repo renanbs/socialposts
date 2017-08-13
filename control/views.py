@@ -10,7 +10,6 @@ from .models import Control
 
 
 def control_list(request):
-
     # queryset_list = Control.objects.all().order_by("group")
     # queryset_list = Control.objects.all().filter(group__pk=1)
     queryset_list = Control.objects.all()

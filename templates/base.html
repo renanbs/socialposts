@@ -28,6 +28,22 @@
 
 {% include "messages_display.html" %}
 <div class="container">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-3">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Social-Posts</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link {% if request.resolver_match.url_name == 'control_list' %}active{% endif %}"
+             href="/control">Control</a>
+          <a class="nav-item nav-link {% if request.resolver_match.url_name == 'groups_list' %}active{% endif %}"
+             href="/groups">Groups</a>
+          <a class="nav-item nav-link {% if request.resolver_match.url_name == 'posts_list' %}active{% endif %}"
+             href="/posts">Posts</a>
+        </div>
+      </div>
+    </nav>
     {% block content %}
 
     {% endblock content %}

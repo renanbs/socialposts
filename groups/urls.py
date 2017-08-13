@@ -9,7 +9,7 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^$', group_list, name="list"),
+    url(r'^$', group_list, name="groups_list"),
     url(r'^create/$', group_create),
     url(r'^(?P<id>\d+)/$', group_detail, name="detail"),
     url(r'^(?P<id>\d+)/edit/$', group_update, name="update"),
