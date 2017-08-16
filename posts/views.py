@@ -84,7 +84,7 @@ def post_delete(request, id=None):
     instance = get_object_or_404(Post, id=id)
     instance.delete()
     messages.success(request, "Successfully Deleted")
-    return redirect("posts:list")
+    return redirect("posts:posts_list")
 
 
 def post_update(request, id=None):

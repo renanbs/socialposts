@@ -106,4 +106,4 @@ def group_delete(request, id=None):
     instance = get_object_or_404(Group, id=id)
     instance.delete()
     messages.success(request, "Successfully Deleted")
-    return redirect("groups:list")
+    return redirect("groups:posts_list")
