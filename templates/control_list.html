@@ -19,9 +19,9 @@
                 <thead class="thead-inverse">
                 <tr>
                     <th class="text-center">Action</th>
-                    <th>Group</th>
+                    <th class="text-center">Group</th>
                     {% for value in column %}
-                        <th>#</th>
+                        <th class="text-center">#</th>
                     {% endfor %}
                 </tr>
                 </thead>
@@ -32,9 +32,9 @@
                     <tr>
                         <td class="text-center"><a class='btn btn-info btn-xs' href="#"><i class="fa fa-pencil"></i></a>
                             <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td>
-                        <th>{{ key }}</th>
+                        <th class="text-center">{{ key }}</th>
                         {% for control in value %}
-                            <th><a href="{{ control.post.get_absolute_url }}">{{ control.published | date:"d/m/y" }}</a></th>
+                            <th class="text-center"><a href="{{ control.post.get_absolute_url }}">{{ control.published | date:"d/m/y" }}<br>{{ control.post.id }}</a></th>
                         {% endfor %}
                     </tr>
                 {% endfor %}

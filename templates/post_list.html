@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-12">
             <h1>{{ title }}</h1>
             <form method="get" action="">
                 <div class="input-group mb-3">
@@ -32,7 +32,7 @@
                 </div>
             {% endfor %}
 
-                        <nav aria-label="...">
+            <nav aria-label="...">
                 <ul class="pagination">
                     {% if object_list.has_previous %}
                         <li class="page-item">

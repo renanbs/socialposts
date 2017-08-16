@@ -12,13 +12,13 @@
 
 {% block content %}
     <div class="row justify-content-center mb-3">
-        <div class="col-8">
+        <div class="col-12">
             <h1>{{ instance.title }}</h1>
             <small class="pull-left" style="padding-left: 10px;"><a href="{{ instance.url }}">{{ instance.url }}</a></small>
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-12">
             <div class="card card-success mb-3">
                 <div class="card-block" style="padding: 0.5rem">
                     <h4 class="card-title">All Systems Operational</h4>
@@ -54,6 +54,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>Title</th>
                     <th>Content</th>
                     <th>Published</th>
@@ -62,9 +63,10 @@
                 <tbody>
                 {% for control in controls %}
                     <tr>
-                        <td>{{ control.post.title }}</td>
-                        <td>{{ control.post.content }}</td>
-                        <td>{{ control.published }}</td>
+                        <td><a href="{{ control.post.get_absolute_url }}">{{ control.post.id }}</a></td>
+                        <td><a href="{{ control.post.get_absolute_url }}">{{ control.post }}</a></td>
+                        <td><a href="{{ control.post.get_absolute_url }}">{{ control.post.content }}</a></td>
+                        <td><a href="{{ control.post.get_absolute_url }}">{{ control.published }}</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
