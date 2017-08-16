@@ -29,11 +29,6 @@ def control_list(request):
     gs = Group.objects.all().filter(group_status__contains="ok")
     queryset_list = Control.objects.all().filter(group__pk__in=gs)
 
-    dd = {}
-    for g in gs:
-        d = queryset_list.filter(group_id=g.id)
-        dd[g.title] = d
-
     # if request.user.is_staff or request.user.is_superuser:
     #     queryset_list = Control.objects.all()
 
@@ -46,6 +41,11 @@ def control_list(request):
             Q(group__admin__icontains=query) |
             Q(group__obs__icontains=query)
         ).distinct()  # avoid duplicated items
+
+    dd = {}
+    for g in gs:
+        d = queryset_list.filter(group_id=g.id)
+        dd[g.title] = d
 
     paginator = Paginator(queryset_list, 50)  # Show 5 contacts per page
     page_request_var = 'page'
