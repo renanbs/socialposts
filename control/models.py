@@ -28,7 +28,8 @@ class Control(models.Model):
         return str(self.published)
 
     def get_absolute_url(self):
-        return reverse("control:list")
+        return reverse("control:control_list")
 
     class Meta:
-        ordering = ['-group', 'published']
+        # unique_together = ("post", "group")
+        ordering = ['published']

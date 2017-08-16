@@ -2,13 +2,12 @@
 
 {% block content %}
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-12">
             <h1>{{ title }}</h1>
             <form method="get" action="">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="q" placeholder="Search groups and posts" value="{{ request.GET.q }}"/>
                     <span class="input-group-btn">
-                    <!--<input class="btn btn-default" type="submit" value="Search"/>-->
                     <button class="btn btn-default" type="submit"/><i class="fa fa-search" aria-hidden="true"></i>
                 </span>
                 </div>
@@ -19,21 +18,27 @@
             <table class="table table-hover table-striped">
                 <thead class="thead-inverse">
                 <tr>
-                    <th>Group</th>
-                    <th>Post</th>
-                    <th>Date</th>
                     <th class="text-center">Action</th>
+                    <th>Group</th>
+                    {% for value in column %}
+                        <th>#</th>
+                    {% endfor %}
                 </tr>
                 </thead>
-                {% for obj in object_list %}
+
+
+
+                {% for key, value in dd.items %}
                     <tr>
-                        <td><a href="{{ obj.group.get_absolute_url }}">{{ obj.group.title }}</a></td>
-                        <td><a href="{{ obj.post.get_absolute_url }}">{{ obj.post.title }}</a></td>
-                        <td>{{ obj.published }}</td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Del</a></td>
+                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><i class="fa fa-pencil"></i></a>
+                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td>
+                        <th>{{ key }}</th>
+                        {% for control in value %}
+                            <th><a href="{{ control.post.get_absolute_url }}">{{ control.published | date:"d/m/y" }}</a></th>
+                        {% endfor %}
                     </tr>
                 {% endfor %}
+
             </table>
 
 

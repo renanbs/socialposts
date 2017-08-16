@@ -5,16 +5,34 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
 from .forms import ControlForm
-from .models import Control
+from .models import Control, Group
+
 # Create your views here.
 
 
 def control_list(request):
     # queryset_list = Control.objects.all().order_by("group")
     # queryset_list = Control.objects.all().filter(group__pk=1)
-    queryset_list = Control.objects.all()
+    # queryset_list = Control.objects.all().filter(group__).distinct()
     # queryset_list = Control.objects.all()
     # queryset_list = Control.objects.filter(group__title__icontains="title")
+
+    # queryset_list = Control.objects.all().values('group').distinct()
+    # queryset_list = Control.objects.select_related('group')
+    # print(queryset_list)
+
+    # qq = queryset_list.group_set.all()
+    # qq = queryset_list.values('group').distinct()
+    #
+    # print("qq=", qq)
+
+    gs = Group.objects.all().filter(group_status__contains="ok")
+    queryset_list = Control.objects.all().filter(group__pk__in=gs)
+
+    dd = {}
+    for g in gs:
+        d = queryset_list.filter(group_id=g.id)
+        dd[g.title] = d
 
     # if request.user.is_staff or request.user.is_superuser:
     #     queryset_list = Control.objects.all()
@@ -46,6 +64,8 @@ def control_list(request):
         "object_list": queryset,
         "title": "Control",
         "page_request_var": page_request_var,
+        "dd": dd,
+        "column": range(10),
     }
     return render(request, "control_list.html", context)
 
