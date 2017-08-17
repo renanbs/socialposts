@@ -26,7 +26,7 @@ def control_list(request):
     #
     # print("qq=", qq)
 
-    gs = Group.objects.all().filter(group_status__contains="ok")
+    gs = Group.objects.all().filter(status__contains="ok")
     queryset_list = Control.objects.all().filter(group__pk__in=gs)
 
     # if request.user.is_staff or request.user.is_superuser:

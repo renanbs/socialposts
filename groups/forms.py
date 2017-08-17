@@ -10,9 +10,8 @@ class GroupForm(forms.ModelForm):
         fields = [
             "title",
             "url",
-            "group_status",
             "admin",
-            "admin_status",
+            "status",
             "frequency",
             "frq_scale",
             "obs",
