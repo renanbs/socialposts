@@ -26,8 +26,14 @@ def control_list(request):
     #
     # print("qq=", qq)
 
-    gs = Group.objects.all().filter(status__contains="ok")
-    queryset_list = Control.objects.all().filter(group__pk__in=gs)
+    groups = Group.objects.all()
+    group_status = groups.first().s
+
+    group_query = request.GET.get("group_status")
+    if group_query:
+        groups = groups.filter(status__contains=group_query)
+
+    queryset_list = Control.objects.all().filter(group__pk__in=groups)
 
     # if request.user.is_staff or request.user.is_superuser:
     #     queryset_list = Control.objects.all()
@@ -43,7 +49,7 @@ def control_list(request):
         ).distinct()  # avoid duplicated items
 
     dd = {}
-    for g in gs:
+    for g in groups:
         d = queryset_list.filter(group_id=g.id)
         dd[g.title] = d
 
@@ -66,6 +72,7 @@ def control_list(request):
         "page_request_var": page_request_var,
         "dd": dd,
         "column": range(10),
+        "group_status": group_status,
     }
     return render(request, "control_list.html", context)
 

@@ -5,20 +5,22 @@ from posts.models import Post
 from django.core.urlresolvers import reverse
 
 
-status = (
-    ('ok', 'ok'),
-    ('waiting in', 'waiting in'),
-    ('waiting admin', 'waiting admin'),
-    ('admin ignored', 'admin ignored'),
-    )
-
-
 class Group(models.Model):
     title = models.CharField(max_length=200)
     url = models.URLField(unique=True)
     contact_updated = models.DateField(auto_now=False, auto_now_add=True)
     admin = models.CharField(max_length=20)
-    status = models.CharField(max_length=20, choices=status)
+
+    s = ('ok', 'nok', 'waiting in', 'waiting admin', 'admin ignored')
+    Status = (
+        ('ok', 'ok'),
+        ('nok', 'nok'),
+        ('waiting in', 'waiting in'),
+        ('waiting admin', 'waiting admin'),
+        ('admin ignored', 'admin ignored'),
+    )
+
+    status = models.CharField(max_length=20, choices=Status)
     frequency = models.IntegerField()  # allowed post frequency
     frq_scale = models.CharField(max_length=20, blank=True)
     obs = models.TextField(blank=True)
