@@ -13,17 +13,18 @@
                 </div>
             </form>
 
-            <form class="form-inline" method="get" action="">
-                <label class="mr-sm-2" for="inlineFormCustomSelect">Group status</label>
-                <select class="form-control mb-2 mr-sm-2 mb-sm-0" name="group_status" id="inlineFormCustomSelect">
-                    <option>-----</option>
-                    {% for st in group_status %}
-                        <option value="{{ st }}">{{ st }}</option>
-                    {% endfor %}
-                </select>
+            <div class="card mb-2">
+                <div class="card-block">
+                    <h4 class="card-title">Filters</h4>
+                    <div class="card-text">
+                        <form class="form-inline" method="post" action="">{% csrf_token %}
+                            {{ filter_form }}
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary">Filter</button>
-            </form>
 
             <a href="{{ object_list.get_absolute_url }}create" class="btn btn-primary float-right mb-3"><i class="fa fa-plus"></i> Add new</a>
 

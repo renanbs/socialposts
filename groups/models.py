@@ -11,13 +11,13 @@ class Group(models.Model):
     contact_updated = models.DateField(auto_now=False, auto_now_add=True)
     admin = models.CharField(max_length=20)
 
-    s = ('ok', 'nok', 'waiting in', 'waiting admin', 'admin ignored')
+    s = ('------', 'ok', 'nok', 'waiting in', 'waiting admin', 'admin ignored')
     Status = (
-        ('ok', 'ok'),
-        ('nok', 'nok'),
-        ('waiting in', 'waiting in'),
-        ('waiting admin', 'waiting admin'),
-        ('admin ignored', 'admin ignored'),
+        (1, 'ok'),
+        (2, 'nok'),
+        (3, 'waiting in'),
+        (4, 'waiting admin'),
+        (5, 'admin ignored'),
     )
 
     status = models.CharField(max_length=20, choices=Status)

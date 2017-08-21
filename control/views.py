@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
-from .forms import ControlForm
+from datetime import date, timedelta
+
+from .forms import ControlForm, FilterControl
 from .models import Control, Group
 
 # Create your views here.
@@ -28,12 +30,31 @@ def control_list(request):
 
     groups = Group.objects.all()
     group_status = groups.first().s
+    # print("group_status =" + str(group_status))
+    group_query = 1
+    period_initial = date.today()-timedelta(days=30)
+    period_final = date.today()
 
-    group_query = request.GET.get("group_status")
+    if request.method == "POST":
+        filter_form = FilterControl(request.POST)
+        if filter_form.is_valid():
+            # print("cleaned data: " + str(filter_form.cleaned_data))
+            group_query = int(filter_form.cleaned_data['group_status'])
+            # print("group query = " + str(group_query))
+            period_initial = filter_form.cleaned_data['period_initial']
+            period_final = filter_form.cleaned_data['period_final']
+            # print("period_initial=" + str(period_initial) + " period_final=" + str(period_final))
+    else:
+        filter_form = FilterControl()
+
+    # print("First time: " + str(group_query))
+
     if group_query:
-        groups = groups.filter(status__contains=group_query)
+        # print("Filtering groups=" + str(group_status) + " with " + str(group_query) + " -> " + group_status[group_query])
+        groups = groups.filter(status__contains=group_status[group_query])
+        # print("groups filtered=" + str(groups))
 
-    queryset_list = Control.objects.all().filter(group__pk__in=groups)
+    queryset_list = Control.objects.all().filter(group__pk__in=groups).filter(published__range=[period_initial, period_final])
 
     # if request.user.is_staff or request.user.is_superuser:
     #     queryset_list = Control.objects.all()
@@ -73,6 +94,7 @@ def control_list(request):
         "dd": dd,
         "column": range(10),
         "group_status": group_status,
+        "filter_form": filter_form,
     }
     return render(request, "control_list.html", context)
 
