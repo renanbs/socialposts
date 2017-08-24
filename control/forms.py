@@ -1,7 +1,10 @@
 from django import forms
+from django.conf import settings
 from datetime import date, timedelta
 
-from .models import Control, Group
+from .models import Control
+
+STATUS_CHOICES = getattr(settings, "STATUS_CHOICES", ())
 
 
 class ControlForm(forms.ModelForm):
@@ -22,7 +25,7 @@ class FilterControl(forms.Form):
                                                                 "name": "group_status"}),
                                      initial=1,
                                      label_suffix="",
-                                     choices=Group.objects.all().first().Status,
+                                     choices=STATUS_CHOICES,
                                      required=False,
                                      label="Group status")
     period_initial = forms.DateField(widget=forms.SelectDateWidget(attrs={'class': 'form-control mb-2 mr-sm-2 mb-sm-0 ml-sm-2',

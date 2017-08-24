@@ -1,8 +1,17 @@
 from django.db import models
+from django.conf import settings
 
 from posts.models import Post
 
 from django.core.urlresolvers import reverse
+
+STATUS_CHOICES = getattr(settings, "STATUS_CHOICES", ())
+STATUS_LIST = getattr(settings, "STATUS_LIST", ())
+
+
+class GroupManager(models.Manager):
+    def filter_by_status(self, status):
+        return super(GroupManager, self).filter(status__contains=status)
 
 
 class Group(models.Model):
@@ -11,21 +20,14 @@ class Group(models.Model):
     contact_updated = models.DateField(auto_now=False, auto_now_add=True)
     admin = models.CharField(max_length=20)
 
-    s = ('------', 'ok', 'nok', 'waiting in', 'waiting admin', 'admin ignored')
-    Status = (
-        (1, 'ok'),
-        (2, 'nok'),
-        (3, 'waiting in'),
-        (4, 'waiting admin'),
-        (5, 'admin ignored'),
-    )
-
-    status = models.CharField(max_length=20, choices=Status)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     frequency = models.IntegerField()  # allowed post frequency
     frq_scale = models.CharField(max_length=20, blank=True)
     obs = models.TextField(blank=True)
 
     posts = models.ManyToManyField(Post, through='control.Control')
+
+    objects = GroupManager()
 
     def __str__(self):
         return self.title

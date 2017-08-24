@@ -138,3 +138,12 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+
+STATUS_LIST = ('------', 'ok', 'nok', 'waiting in', 'waiting admin', 'admin ignored')
+STATUS_CHOICES = (
+    (1, 'ok'),
+    (2, 'nok'),
+    (3, 'waiting in'),
+    (4, 'waiting admin'),
+    (5, 'admin ignored'),
+)

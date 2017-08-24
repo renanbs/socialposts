@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
+from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.views.generic import TemplateView
+
 
 from datetime import date, timedelta
 
@@ -12,49 +15,57 @@ from .models import Control, Group
 # Create your views here.
 
 
+STATUS_LIST = getattr(settings, "STATUS_LIST", ())
+
+
+class ControlList(TemplateView):
+    template_name = "control_list.html"
+
+    def get_context_data(self):
+        # get_context_data creates the context
+        context = TemplateView.get_context_data(self)
+
+        group_status = STATUS_LIST
+        group_query_idx = 1
+        period_initial = date.today() - timedelta(days=30)
+        period_final = date.today()
+
+        context.update({
+            "title": "Control",
+            "column": range(10),
+            "group_status": group_status,
+            "group_query": group_query_idx,
+            "period_initial": period_initial,
+            "period_final": period_final,
+        })
+        return context
+
+    def get(self):
+        filter_form = FilterControl()
+
+
+
 def control_list(request):
-    # queryset_list = Control.objects.all().order_by("group")
-    # queryset_list = Control.objects.all().filter(group__pk=1)
-    # queryset_list = Control.objects.all().filter(group__).distinct()
-    # queryset_list = Control.objects.all()
-    # queryset_list = Control.objects.filter(group__title__icontains="title")
-
-    # queryset_list = Control.objects.all().values('group').distinct()
-    # queryset_list = Control.objects.select_related('group')
-    # print(queryset_list)
-
-    # qq = queryset_list.group_set.all()
-    # qq = queryset_list.values('group').distinct()
-    #
-    # print("qq=", qq)
-
-    groups = Group.objects.all()
-    group_status = groups.first().s
-    # print("group_status =" + str(group_status))
-    group_query = 1
+    group_status = STATUS_LIST
+    group_query_idx = 1
     period_initial = date.today()-timedelta(days=30)
     period_final = date.today()
 
     if request.method == "POST":
         filter_form = FilterControl(request.POST)
         if filter_form.is_valid():
-            # print("cleaned data: " + str(filter_form.cleaned_data))
-            group_query = int(filter_form.cleaned_data['group_status'])
-            # print("group query = " + str(group_query))
+            group_query_idx = int(filter_form.cleaned_data['group_status'])
             period_initial = filter_form.cleaned_data['period_initial']
             period_final = filter_form.cleaned_data['period_final']
-            # print("period_initial=" + str(period_initial) + " period_final=" + str(period_final))
+
     else:
         filter_form = FilterControl()
 
-    # print("First time: " + str(group_query))
+    if group_query_idx:
+        filtered_groups = Group.objects.filter_by_status(group_status[group_query_idx])
 
-    if group_query:
-        # print("Filtering groups=" + str(group_status) + " with " + str(group_query) + " -> " + group_status[group_query])
-        groups = groups.filter(status__contains=group_status[group_query])
-        # print("groups filtered=" + str(groups))
-
-    queryset_list = Control.objects.all().filter(group__pk__in=groups).filter(published__range=[period_initial, period_final])
+    queryset_list = Control.objects.filter_by_group_status(group_status[group_query_idx])\
+        .filter(published__range=[period_initial, period_final])
 
     # if request.user.is_staff or request.user.is_superuser:
     #     queryset_list = Control.objects.all()
@@ -69,12 +80,12 @@ def control_list(request):
             Q(group__obs__icontains=query)
         ).distinct()  # avoid duplicated items
 
-    dd = {}
-    for g in groups:
-        d = queryset_list.filter(group_id=g.id)
-        dd[g.title] = d
+    controls_per_group = {}
+    for group in filtered_groups:
+        control = queryset_list.filter(group_id=group.id)
+        controls_per_group[group.title] = control
 
-    paginator = Paginator(queryset_list, 50)  # Show 5 contacts per page
+    paginator = Paginator(queryset_list, 50)
     page_request_var = 'page'
 
     page = request.GET.get(page_request_var)
@@ -91,7 +102,7 @@ def control_list(request):
         "object_list": queryset,
         "title": "Control",
         "page_request_var": page_request_var,
-        "dd": dd,
+        "controls_per_group": controls_per_group,
         "column": range(10),
         "group_status": group_status,
         "filter_form": filter_form,
