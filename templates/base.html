@@ -38,7 +38,7 @@
                     <li class="nav-item">
                         {% if user.is_authenticated %}
                             <a class="nav-link" href="{% url 'auth_logout' %}">
-                                Logout
+                                <strong>{{ user.get_username }}</strong>, logout
                             </a>
                         {% endif %}
                     </li>
