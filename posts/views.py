@@ -3,12 +3,14 @@ from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from .forms import PostForm
 from .models import Post
 # Create your views here.
 
 
+@login_required(login_url="/accounts/login/")
 def post_list(request):
     # today = timezone.now().date()
     # queryset_list = Post.objects.filter(draft=False).filter(publish__lte=timezone.now()) #all() #.order_by("-timestamp")
@@ -43,6 +45,7 @@ def post_list(request):
     return render(request, "post_list.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def post_detail(request, id=None):
     instance = get_object_or_404(Post, id=id)
 
@@ -57,6 +60,7 @@ def post_detail(request, id=None):
     return render(request, "post_detail.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def post_create(request):
     print(request.user)
     if not request.user.is_staff or not request.user.is_superuser:
@@ -78,6 +82,7 @@ def post_create(request):
     return render(request, "post_create.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def post_delete(request, id=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
@@ -87,6 +92,7 @@ def post_delete(request, id=None):
     return redirect("posts:posts_list")
 
 
+@login_required(login_url="/accounts/login/")
 def post_update(request, id=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404

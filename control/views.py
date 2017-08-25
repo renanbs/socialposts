@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 from datetime import date, timedelta
@@ -18,7 +20,9 @@ from .models import Control, Group
 STATUS_LIST = getattr(settings, "STATUS_LIST", ())
 
 
-class ControlList(TemplateView):
+class ControlList(LoginRequiredMixin, TemplateView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     template_name = "control_list.html"
 
     def get(self, request):
@@ -199,6 +203,7 @@ def control_list(request):
     return render(request, "control_list.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def control_create(request):
     print(request.user)
     if not request.user.is_staff or not request.user.is_superuser:

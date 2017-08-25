@@ -3,12 +3,14 @@ from django.http import HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from .forms import GroupForm
 from .models import Group
 # Create your views here.
 
 
+@login_required(login_url="/accounts/login/")
 def group_list(request):
     # today = timezone.now().date()
     # queryset_list = Post.objects.filter(draft=False).filter(publish__lte=timezone.now()) #all() #.order_by("-timestamp")
@@ -44,6 +46,7 @@ def group_list(request):
     return render(request, "group_list.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def group_detail(request, id=None):
     instance = get_object_or_404(Group, id=id)
 
@@ -61,6 +64,7 @@ def group_detail(request, id=None):
     return render(request, "group_detail.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def group_create(request):
     print(request.user)
     if not request.user.is_staff or not request.user.is_superuser:
@@ -82,6 +86,7 @@ def group_create(request):
     return render(request, "group_create.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def group_update(request, id=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
@@ -100,6 +105,7 @@ def group_update(request, id=None):
     return render(request, "group_create.html", context)
 
 
+@login_required(login_url="/accounts/login/")
 def group_delete(request, id=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
