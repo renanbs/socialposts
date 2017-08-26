@@ -135,7 +135,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__fi
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(PROJECT_ROOT, "static"),
 ]
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, "static_cdn")
