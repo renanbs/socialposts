@@ -140,7 +140,9 @@ USE_TZ = True
 #     os.path.join(PROJECT_ROOT, 'static'),
 # )
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+print("PROJECT_ROOT->" + PROJECT_ROOT)
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_cdn')
+print("STATIC_ROOT->" + STATIC_ROOT)
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
