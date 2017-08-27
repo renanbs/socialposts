@@ -23,8 +23,10 @@ $ cd socialposts
 $ python -m venv .
 $ source ./bin/activate
 $ git clone https://github.com/renanbs/social-posts.git src
-$ pip install -r requirements.txt
 $ cd src
+$ pip install -r requirements.txt
+$ python manage.py migrate
+$ python manage.py createsuperuser 
 $ python manage.py runserver
 ```
 
