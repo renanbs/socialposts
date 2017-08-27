@@ -29,6 +29,8 @@ $ python manage.py migrate
 $ python manage.py createsuperuser 
 $ python manage.py runserver
 ```
+If you want to run this server as DEBUG, just create a file local.py in the settings directory and change **DEBUG = False** to **DEBUG = True** 
+
 
 ## Live working version
 
