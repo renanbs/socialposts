@@ -181,5 +181,11 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
 # Emulate email in the console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+EMAIL_HOST = 'smtp.aol.com'
+EMAIL_HOST_USER = 'socialposts@aol.com'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'default')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
