@@ -4,7 +4,7 @@ from datetime import date, timedelta
 
 from .models import Control
 
-STATUS_CHOICES = getattr(settings, "STATUS_CHOICES", ())
+STATUS_CHOICES_INDEXED = getattr(settings, "STATUS_CHOICES_INDEXED", ())
 
 
 class ControlForm(forms.ModelForm):
@@ -25,7 +25,7 @@ class FilterControl(forms.Form):
                                                                 "name": "group_status"}),
                                      initial=1,
                                      label_suffix="",
-                                     choices=STATUS_CHOICES,
+                                     choices=STATUS_CHOICES_INDEXED,
                                      required=False,
                                      label="Group status")
     period_initial = forms.DateField(widget=forms.SelectDateWidget(attrs={'class': 'form-control mb-2 mr-sm-2 mb-sm-0 ml-sm-2',

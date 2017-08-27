@@ -26,11 +26,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link {% if request.resolver_match.url_name == 'control_list' %}active{% endif %}"
-                   href="/control">Control</a>
+                   href="{% url 'control:control_list' %}">Control</a>
                 <a class="nav-item nav-link {% if request.resolver_match.url_name == 'groups_list' %}active{% endif %}"
-                   href="/groups">Groups</a>
+                   href="{% url 'groups:groups_list' %}">Groups</a>
                 <a class="nav-item nav-link {% if request.resolver_match.url_name == 'posts_list' %}active{% endif %}"
-                   href="/posts">Posts</a>
+                   href="{% url 'posts:posts_list' %}">Posts</a>
             </div>
 
             <div class="navbar-collapse justify-content-md-end">

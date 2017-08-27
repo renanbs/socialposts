@@ -23,7 +23,7 @@ print("BASE_DIR->" + BASE_DIR)
 SECRET_KEY = '#ayvr#)4c1#+t@(8q=a(e47bpol+d5g8h_9pcb8563$73qi4$7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'socialpostscontrol.herokuapp.com']
 
@@ -161,6 +161,14 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATUS_LIST = ('------', 'ok', 'nok', 'waiting in', 'waiting admin', 'admin ignored')
 STATUS_CHOICES = (
+    ('ok', 'ok'),
+    ('nok', 'nok'),
+    ('waiting in', 'waiting in'),
+    ('waiting admin', 'waiting admin'),
+    ('admin ignored', 'admin ignored'),
+)
+
+STATUS_CHOICES_INDEXED = (
     (1, 'ok'),
     (2, 'nok'),
     (3, 'waiting in'),
@@ -168,13 +176,12 @@ STATUS_CHOICES = (
     (5, 'admin ignored'),
 )
 
-
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
 SITE_ID = 1
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/control/'
+LOGIN_REDIRECT_URL = '/'
 
 # Emulate email in the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
