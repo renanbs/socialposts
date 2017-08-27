@@ -14,7 +14,6 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-print("BASE_DIR->" + BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -143,9 +142,7 @@ USE_TZ = True
 #     os.path.join(PROJECT_ROOT, 'static'),
 # )
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-print("PROJECT_ROOT->" + PROJECT_ROOT)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
-print("STATIC_ROOT->" + STATIC_ROOT)
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
