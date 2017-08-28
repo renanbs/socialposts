@@ -164,8 +164,8 @@ STATUS_CHOICES_INDEXED = (
     (5, 'admin ignored'),
 )
 
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 SITE_ID = 1
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
