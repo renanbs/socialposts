@@ -10,6 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 * I have tested this project on a Linux Antergos 64;
+* Postgresql (Heroku)
 * Python 3.6.2 
 * Django 1.11
 
@@ -29,7 +30,13 @@ $ python manage.py migrate
 $ python manage.py createsuperuser 
 $ python manage.py runserver
 ```
-If you want to run this server as DEBUG, just create a file local.py in the settings directory and change **DEBUG = False** to **DEBUG = True** 
+
+## Running locally
+
+ * Download this file [local.py](https://gist.github.com/renanbs/8081a804ee6fd9e3065786fbf6ca1d68) and copy to sociaposts/settings directory.
+ * This file will not send emails, it will use the console to print what would be emailed to a new user.
+ * It is in **DEBUG** mode 
+ * The database is sqlite 
 
 
 ## Live working version
